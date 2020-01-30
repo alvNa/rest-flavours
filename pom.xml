@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.alvna.rest</groupId>
+    <artifactId>parent-pom</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <packaging>pom</packaging>
+    <description>Parent POM</description>
+
+    <scm>
+        <url>https://github.com/alvNa/rest-flavours</url>
+        <connection>scm:git:git://github.com/alvNa/rest-flavours.git</connection>
+        <developerConnection>scm:git:git@github.com:alvNa/rest-flavours.git</developerConnection>
+    </scm>
+
+    <modules>
+        <module>customer-service</module>
+    </modules>
+
+    <!--<distributionManagement>-->
+        <!--<snapshotRepository>-->
+            <!--<id>nexus-snapshots</id>-->
+            <!--<name>nexus-snapshots</name>-->
+            <!--<url>https://nexus/repository/maven-snapshots</url>-->
+        <!--</snapshotRepository>-->
+        <!--<repository>-->
+            <!--<id>nexus-releases</id>-->
+            <!--<name>nexus-releases</name>-->
+            <!--<url>https://nexus/repository/maven-releases</url>-->
+        <!--</repository>-->
+        <!--<site>-->
+            <!--<id>nexus</id>-->
+            <!--<url>scp://developer@nexus:/var/www/html/javadoc</url>-->
+        <!--</site>-->
+    <!--</distributionManagement>-->
+
+</project>
