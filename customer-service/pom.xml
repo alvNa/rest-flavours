@@ -14,7 +14,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <encoding>UTF-8</encoding>
-        <scala.version>2.12.9</scala.version>
+        <scala.version>2.12.10</scala.version>
         <scala.compat.version>2.12</scala.compat.version>
         <finagle.version>19.9.0</finagle.version>
     </properties>
@@ -64,7 +64,6 @@
         <testSourceDirectory>src/test/scala</testSourceDirectory>
         <plugins>
             <plugin>
-                <!-- see http://davidb.github.com/scala-maven-plugin -->
                 <groupId>net.alchim31.maven</groupId>
                 <artifactId>scala-maven-plugin</artifactId>
                 <version>3.3.2</version>
@@ -100,8 +99,6 @@
                     <reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
                     <junitxml>.</junitxml>
                     <filereports>TestSuiteReport.txt</filereports>
-                    <!-- Comma separated list of JUnit test class names to execute -->
-                    <jUnitClasses>samples.AppTest</jUnitClasses>
                 </configuration>
                 <executions>
                     <execution>
