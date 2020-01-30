@@ -8,6 +8,16 @@
     <packaging>pom</packaging>
     <description>Parent POM</description>
 
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <encoding>UTF-8</encoding>
+        <scala.version>2.13.1</scala.version>
+        <scala.compat.version>2.13</scala.compat.version>
+        <junit.version>5.6.0</junit.version>
+        <scalatest.version>3.0.8</scalatest.version>
+    </properties>
+
     <scm>
         <url>https://github.com/alvNa/rest-flavours</url>
         <connection>scm:git:git://github.com/alvNa/rest-flavours.git</connection>
@@ -16,23 +26,7 @@
 
     <modules>
         <module>customer-service</module>
+        <module>order-service</module>
     </modules>
-
-    <!--<distributionManagement>-->
-        <!--<snapshotRepository>-->
-            <!--<id>nexus-snapshots</id>-->
-            <!--<name>nexus-snapshots</name>-->
-            <!--<url>https://nexus/repository/maven-snapshots</url>-->
-        <!--</snapshotRepository>-->
-        <!--<repository>-->
-            <!--<id>nexus-releases</id>-->
-            <!--<name>nexus-releases</name>-->
-            <!--<url>https://nexus/repository/maven-releases</url>-->
-        <!--</repository>-->
-        <!--<site>-->
-            <!--<id>nexus</id>-->
-            <!--<url>scp://developer@nexus:/var/www/html/javadoc</url>-->
-        <!--</site>-->
-    <!--</distributionManagement>-->
 
 </project>
