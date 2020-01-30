@@ -8,15 +8,9 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>customer-service</artifactId>
     <name>${project.artifactId}</name>
-    <description>customer-service</description>
 
     <properties>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <encoding>UTF-8</encoding>
-        <scala.version>2.12.10</scala.version>
-        <scala.compat.version>2.12</scala.compat.version>
-        <finagle.version>19.9.0</finagle.version>
+        <finagle.version>20.1.0</finagle.version>
     </properties>
 
     <dependencies>
@@ -46,15 +40,15 @@
 
         <!-- Test -->
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.scalatest</groupId>
             <artifactId>scalatest_${scala.compat.version}</artifactId>
-            <version>3.0.8</version>
+            <version>${scalatest.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
