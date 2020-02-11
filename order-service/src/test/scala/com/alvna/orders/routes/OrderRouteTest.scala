@@ -1,6 +1,6 @@
 package com.alvna.orders.routes
 
-import akka.http.scaladsl.model.StatusCodes.{MethodNotAllowed, OK}
+import akka.http.scaladsl.model.StatusCodes.{MethodNotAllowed, OK, NotFound}
 import akka.http.scaladsl.server._
 import akka.http.scaladsl.testkit.ScalatestRouteTest
 import com.alvna.orders.model.OrdersModel.Order
@@ -25,7 +25,7 @@ class OrderRouteTest extends FeatureSpec with GivenWhenThen
 
       Given("a valid endpoint")
       val currentOrder = Order("1", "i-phone")
-      when(orderService.get(any)).thenReturn(Future.successful(currentOrder))
+      when(orderService.get(any)).thenReturn(Future.successful(Some(currentOrder)))
 
       When("the endpoint is invoked")
       val response = Get(OrderEndpoint) ~> orderRoutes
@@ -36,6 +36,20 @@ class OrderRouteTest extends FeatureSpec with GivenWhenThen
         status shouldEqual OK
       }
     }
+
+    scenario("return a 404 for GET requests") {
+
+      Given("a valid endpoint")
+      when(orderService.get(any)).thenReturn(Future.successful(None))
+
+      When("the endpoint is invoked")
+      val response = Get(OrderEndpoint) ~> orderRoutes
+
+      Then("return a 404 response")
+      response ~> check {
+        status shouldEqual NotFound
+      }
+    }
   }
 
   feature("The Order Route angry path") {
@@ -43,7 +57,7 @@ class OrderRouteTest extends FeatureSpec with GivenWhenThen
 
       Given("a not implemented endpoint")
       val currentOrder = Order("1", "i-phone")
-      when(orderService.get(any)).thenReturn(Future.successful(currentOrder))
+      when(orderService.get(any)).thenReturn(Future.successful(Some(currentOrder)))
 
       When("the endpoint is invoked")
       val response = Put(OrderEndpoint) ~> Route.seal(orderRoutes)

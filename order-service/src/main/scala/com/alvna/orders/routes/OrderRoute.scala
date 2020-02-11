@@ -1,6 +1,6 @@
 package com.alvna.orders.routes
 
-import akka.http.scaladsl.model.StatusCodes.{InternalServerError, OK}
+import akka.http.scaladsl.model.StatusCodes.{InternalServerError, OK, NotFound}
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.Route
 import com.alvna.orders.common.JsonSupport
@@ -15,10 +15,13 @@ trait OrderRoute extends JsonSupport {
   def orderRoutes: Route = pathPrefix(OrdersPath) {
     path(Segment) { id =>
       get {
-          onComplete(orderService.get(id)) {
-              case Success(order) => complete(OK, order)
-              case Failure(ex) => complete(InternalServerError, ex.getMessage)
+        onComplete(orderService.get(id)) {
+          case Success(maybeOrder) => maybeOrder match {
+            case Some(order) => complete(OK, order)
+            case None => complete(NotFound)
           }
+          case Failure(ex) => complete(InternalServerError, ex.getMessage)
+        }
       }
     }
   }

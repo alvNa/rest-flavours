@@ -14,6 +14,7 @@
     <properties>
         <akka.version>2.6.3</akka.version>
         <akka.http.version>10.1.11</akka.http.version>
+        <slick.version>3.3.2</slick.version>
     </properties>
 
     <dependencies>
@@ -80,6 +81,16 @@
             <artifactId>mockito-all</artifactId>
             <version>1.10.19</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.typesafe.slick</groupId>
+            <artifactId>slick_${scala.compat.version}</artifactId>
+            <version>${slick.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.typesafe.slick</groupId>
+            <artifactId>slick-testkit_${scala.compat.version}</artifactId>
+            <version>${slick.version}</version>
         </dependency>
     </dependencies>
     <build>
