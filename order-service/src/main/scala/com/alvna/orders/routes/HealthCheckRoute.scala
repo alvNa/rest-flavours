@@ -1,4 +1,4 @@
-package com.alvna.orderservice.routes
+package com.alvna.orders.routes
 
 import akka.http.scaladsl.model.HttpEntity
 import akka.http.scaladsl.model.MediaTypes.`application/json`
@@ -11,7 +11,7 @@ trait HealthCheckRoute {
   val HealthCheckPath = "healthcheck"
   val HealthCheckEndpoint = s"/$HealthCheckPath"
 
-  val getRoute: Route = path(HealthCheckPath) {
+  def healthCheckRoutes: Route = path(HealthCheckPath) {
     get {
       pathEndOrSingleSlash {
         complete(OK, HttpEntity(`application/json`, "Status UP"))
