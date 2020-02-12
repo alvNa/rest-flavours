@@ -1,6 +1,8 @@
 package com.alvna.orders.routes
 
-import akka.http.scaladsl.model.StatusCodes.{MethodNotAllowed, OK, NotFound}
+import akka.http.scaladsl.model.HttpEntity
+import akka.http.scaladsl.model.MediaTypes.`application/json`
+import akka.http.scaladsl.model.StatusCodes.{MethodNotAllowed, NotFound, OK}
 import akka.http.scaladsl.server._
 import akka.http.scaladsl.testkit.ScalatestRouteTest
 import com.alvna.orders.model.OrdersModel.Order
@@ -18,6 +20,7 @@ class OrderRouteTest extends FeatureSpec with GivenWhenThen
 
   override val orderService = mock[OrderService]
 
+  private val OrdersEndpoint = s"/${OrdersPath}"
   private val OrderEndpoint = s"/${OrdersPath}/1"
 
   feature("The Order Route happy path") {
@@ -48,6 +51,26 @@ class OrderRouteTest extends FeatureSpec with GivenWhenThen
       Then("return a 404 response")
       response ~> check {
         status shouldEqual NotFound
+      }
+    }
+
+    scenario("return a OK for POST requests") {
+      Given("a valid request to the endpoint")
+      val newOrder = Order("1", "i-phone")
+      when(orderService.add(any)).thenReturn(Future.successful(true))
+
+      val orderJson = s"""{
+         "id": "1",
+         "desc": "i-phone"
+       }"""
+
+      When("the endpoint is invoked")
+      val response = Post(OrdersEndpoint,HttpEntity(`application/json`, orderJson)) ~> Route.seal(orderRoutes)
+
+      Then("return a valid response")
+      response ~> check {
+        responseAs[Order] shouldEqual newOrder
+        status shouldEqual OK
       }
     }
   }

@@ -1,9 +1,10 @@
 package com.alvna.orders.routes
 
-import akka.http.scaladsl.model.StatusCodes.{InternalServerError, OK, NotFound}
+import akka.http.scaladsl.model.StatusCodes.{InternalServerError, NotFound, OK, NotModified}
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.Route
 import com.alvna.orders.common.JsonSupport
+import com.alvna.orders.model.OrdersModel.Order
 import com.alvna.orders.services.OrderService
 
 import scala.util.{Failure, Success}
@@ -13,6 +14,26 @@ trait OrderRoute extends JsonSupport {
   private[routes] val orderService = new OrderService()
 
   def orderRoutes: Route = pathPrefix(OrdersPath) {
+    pathEnd {
+      post {
+        entity(as[Order]) { order =>
+
+          onComplete(orderService.add(order)) {
+            case Success(updated) => updated match {
+              case true =>
+                println(2)
+                complete(OK,order)
+              case false =>
+                println(2)
+                complete(NotModified)
+            }
+            case Failure(ex) =>
+              println(3)
+              complete(InternalServerError, ex.getMessage)
+          }
+        }
+      }
+    } ~
     path(Segment) { id =>
       get {
         onComplete(orderService.get(id)) {
