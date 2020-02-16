@@ -1,9 +1,7 @@
 package com.alvna.orders.persistence
 
-import com.typesafe.config.ConfigFactory
-import slick.jdbc.JdbcBackend.Database
+import slick.jdbc.H2Profile.api._
 
 class H2Support {
-  lazy val config = ConfigFactory.load()
-  lazy val db  = Database.forConfig("h2", config)
+  lazy val db = Database.forConfig("db.h2")
 }
