@@ -15,7 +15,7 @@ trait PopulateDb {
     // Create the tables, including primary and foreign keys
     orders.schema.create,
 
-    // Insert some suppliers
+    // Insert data
     orders ++= Seq(
       Order("1", "iphone"),
       Order("2", "android")
