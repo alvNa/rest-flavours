@@ -3,7 +3,7 @@ package com.alvna.orders
 import akka.actor.ActorSystem
 import akka.event.Logging
 import akka.http.scaladsl.Http
-import com.alvna.orders.persistence.{OrdersDb, OrdersDb2, OrdersDb3, PopulateDb}
+import com.alvna.orders.persistence.PopulateDb
 import com.alvna.orders.routes.Routes
 
 import scala.util.{Failure, Success}
