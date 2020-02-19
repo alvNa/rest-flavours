@@ -8,15 +8,13 @@ import com.alvna.orders.routes.Routes
 
 import scala.util.{Failure, Success}
 
-object Server extends App with PopulateDb
-{
+object Server extends App with PopulateDb{
+
   implicit val system = ActorSystem("order-service")
   // needed for the future flatMap/onComplete in the end
   implicit val executionContext = system.dispatcher
 
   val log = Logging(system, getClass)
-
-  //OrdersDb3.setup()
 
   val bindingFuture = Http().bindAndHandle(Routes.allRoutesUnified, "localhost", 8080)
 
