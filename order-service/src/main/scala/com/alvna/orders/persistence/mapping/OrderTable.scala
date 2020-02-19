@@ -7,11 +7,11 @@ object OrderTable {
   val orders = TableQuery[OrderTable]
 }
 
-class OrderTable(tag: Tag) extends Table[Order](tag, "orders") {
+class OrderTable(tag: Tag) extends Table[Order](tag, /*Some("public"),*/ "orders") {
 
-  def id = column[String]("ID", O.PrimaryKey)
+  def id = column[String]("id", O.PrimaryKey)
 
-  def desc = column[String]("DESCRIPTION")
+  def desc = column[String]("description")
 
   def * = (id, desc) <> (Order.tupled, Order.unapply)
 }

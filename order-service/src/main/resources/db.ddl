@@ -1,0 +1,3 @@
+DROP TABLE IF EXISTS orders;
+
+CREATE TABLE orders (id   VARCHAR(255)   NOT NULL , description VARCHAR(255) NOT NULL, PRIMARY KEY (`id`));

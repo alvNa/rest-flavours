@@ -3,11 +3,13 @@ package com.alvna.orders
 import akka.actor.ActorSystem
 import akka.event.Logging
 import akka.http.scaladsl.Http
+import com.alvna.orders.persistence.PopulateDb
 import com.alvna.orders.routes.Routes
 
 import scala.util.{Failure, Success}
 
-object Server extends App {
+object Server extends App with PopulateDb{
+
   implicit val system = ActorSystem("order-service")
   // needed for the future flatMap/onComplete in the end
   implicit val executionContext = system.dispatcher
