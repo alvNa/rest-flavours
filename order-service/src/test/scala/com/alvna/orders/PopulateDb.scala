@@ -12,8 +12,7 @@ trait PopulateDb {
   val db = Database.forConfig("db.h2")
 
   val setup = DBIO.seq(
-    // Create the tables, including primary and foreign keys
-    orders.schema.drop,
+    // Create the tables, including primary and foreign keys.,
     orders.schema.create,
 
     // Insert data
