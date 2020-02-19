@@ -14,11 +14,13 @@ trait OrderRoute extends JsonSupport {
   private[routes] val orderService = new OrderService()
 
   def orderRoutes: Route = pathPrefix(OrdersPath) {
-    pathEnd {
+    pathEndOrSingleSlash {
       post {
         entity(as[Order]) { order =>
+          println(order)
+          val futureOrder = orderService.add(order)
 
-          onComplete(orderService.add(order)) {
+          onComplete(futureOrder) {
             case Success(updated) => updated match {
               case true =>
                 println(2)

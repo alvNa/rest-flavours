@@ -5,7 +5,7 @@ import com.alvna.orders.persistence.h2.OrderDAO
 
 import scala.concurrent.Future
 
-class OrderService(orderDAO:OrderDAO = new OrderDAO) {
+class OrderService(orderDAO:OrderDAO = new OrderDAO) extends BasicServiceSupport[Order,String]{
 
   def add(order: Order): Future[Boolean] = {
     orderDAO.add(order)
