@@ -63,7 +63,7 @@ implicit val timeout = 3.seconds
       Given("a valid id")
 
       When("the order is deleted")
-      val futureResult = orderDAO.delete("2")
+      val futureResult = orderDAO.delete("1")
 
       Then("is removed from the table")
       whenReady(futureResult) {
