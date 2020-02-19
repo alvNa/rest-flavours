@@ -13,6 +13,7 @@ trait PopulateDb {
 
   val setup = DBIO.seq(
     // Create the tables, including primary and foreign keys
+    orders.schema.drop,
     orders.schema.create,
 
     // Insert data
